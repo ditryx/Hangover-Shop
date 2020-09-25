@@ -2,7 +2,6 @@ package com.ditryx.hangover.controllers;
 
 import com.ditryx.hangover.DAO.UserService;
 import com.ditryx.hangover.DTO.output.AdminUserDTO;
-import com.ditryx.hangover.DTO.output.UserDTO;
 import com.ditryx.hangover.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

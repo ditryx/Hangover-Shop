@@ -4,6 +4,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -12,9 +13,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class BaseEntity {
 
     private long id;
-    private Date create_date;
-    private Date update_date;
+    private Timestamp create_date;
+    private Timestamp update_date;
     private Status status;
+
+    private static final Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
     public BaseEntity() {
     }
@@ -30,28 +33,38 @@ public class BaseEntity {
         this.id = id;
     }
 
+    @PrePersist
+    public void prePersist() {
+        if(create_date == null)
+            create_date = currentTimestamp;
+        if(update_date == null)
+            update_date = currentTimestamp;
+        if(status == null)
+            status = Status.ACTIVE ;
+    }
+
     @CreatedDate
-    @Column(name = "create_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "create_date", nullable = false)
     public Date getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(Date create_date) {
+    public void setCreate_date(Timestamp create_date) {
         this.create_date = create_date;
     }
 
     @LastModifiedDate
-    @Column(name = "update_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "update_date", nullable = false)
     public Date getUpdate_date() {
         return update_date;
     }
 
-    public void setUpdate_date(Date update_date) {
+    public void setUpdate_date(Timestamp update_date) {
         this.update_date = update_date;
     }
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "VARCHAR DEFAULT 'ACTIVE'")
+    @Column(name = "status", nullable = false)
     public Status getStatus() {
         return status;
     }
