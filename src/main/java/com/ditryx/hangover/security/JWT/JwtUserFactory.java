@@ -26,7 +26,7 @@ public final class JwtUserFactory {
                 user.getEmail(),
                 user.getPhoneNumber(),
                 user.getStatus().equals(Status.ACTIVE),
-                user.getUpdate_date(),
+                user.getUpdateDate(),
                 mapToGrantedAuthorities(new ArrayList<>(user.getRoles()))
         );
     }

@@ -2,18 +2,16 @@ package com.ditryx.hangover.DTO.output;
 
 import com.ditryx.hangover.entities.Status;
 import com.ditryx.hangover.entities.User;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AdminUserDTO {
 
     private long id;
-    private Date create_date;
-    private Date update_date;
+    private Timestamp createDate;
+    private Timestamp updateDate;
     private Status status;
     private String login;
     private String firstName;
@@ -55,8 +53,8 @@ public class AdminUserDTO {
     public static AdminUserDTO fromEntity(User user){
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setId(user.getId());
-        userDTO.setCreate_date(user.getCreate_date());
-        userDTO.setUpdate_date(user.getUpdate_date());
+        userDTO.setCreateDate(user.getCreateDate());
+        userDTO.setUpdateDate(user.getUpdateDate());
         userDTO.setStatus(user.getStatus());
         userDTO.setLogin(user.getLogin());
         userDTO.setFirstName(user.getFirstName());
@@ -75,20 +73,20 @@ public class AdminUserDTO {
         this.id = id;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getUpdate_date() {
-        return update_date;
+    public Timestamp getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdate_date(Date update_date) {
-        this.update_date = update_date;
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Status getStatus() {

@@ -5,7 +5,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -13,8 +12,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class BaseEntity {
 
     private long id;
-    private Timestamp create_date;
-    private Timestamp update_date;
+    private Timestamp createDate;
+    private Timestamp updateDate;
     private Status status;
 
     private static final Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
@@ -35,32 +34,32 @@ public class BaseEntity {
 
     @PrePersist
     public void prePersist() {
-        if(create_date == null)
-            create_date = currentTimestamp;
-        if(update_date == null)
-            update_date = currentTimestamp;
+        if(createDate == null)
+            createDate = currentTimestamp;
+        if(updateDate == null)
+            updateDate = currentTimestamp;
         if(status == null)
             status = Status.ACTIVE ;
     }
 
     @CreatedDate
     @Column(name = "create_date", nullable = false)
-    public Date getCreate_date() {
-        return create_date;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Timestamp create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Timestamp create_date) {
+        this.createDate = create_date;
     }
 
     @LastModifiedDate
     @Column(name = "update_date", nullable = false)
-    public Date getUpdate_date() {
-        return update_date;
+    public Timestamp getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdate_date(Timestamp update_date) {
-        this.update_date = update_date;
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
     }
 
     @Enumerated(EnumType.STRING)
